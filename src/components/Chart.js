@@ -3,8 +3,14 @@ import {Bar, Line, Pie} from 'react-chartjs-2';
 
 
 class Chart extends Component {
-  render() {
 
+  static defaultProps = {
+    displayTitle: true,
+    displayLegend: true,
+    legendPosition: 'right',
+    location: 'Massachusetts'
+  }
+  render() {
     const city = this.props.data.city
     const population = this.props.data.population
     const data = {
@@ -20,7 +26,7 @@ class Chart extends Component {
         '#FF0000',
         'FFA500',
         '#20B2AA',
-        '#FFFFF0',
+        '#0000FF',
         '#ADFF2F'
         ],
         hoverBackgroundColor: [
@@ -32,7 +38,7 @@ class Chart extends Component {
         '#FF0000',
         'FFA500',
         '#20B2AA',
-        '#FFFFF0',
+        '#0000FF',
         '#ADFF2F'
         ]
       }]
@@ -40,7 +46,39 @@ class Chart extends Component {
 
     return (
       <div>
-        <Pie data={data} />
+        <Pie 
+          data={data}
+          options={{
+            title:{
+              display: this.props.displayTitle,
+              text: `Largest Cities In ${this.props.location}`,
+              fontSize: 30
+            },
+            legend: {
+              display: this.props.displayLegend,
+              position: this.props.legendPosition
+            }
+            }}
+          />
+        <Bar 
+          data={data}
+          options={{
+            legend: {
+              display: false,
+            }, 
+            scales: {
+              xAxes: [{
+                barPercentage: 1,
+                barThickness: 100,
+                maxBarThickness: 50,
+                minBarLength: 5,
+                gridLines: {
+                    offsetGridLines: true
+                }
+          }]
+    }
+            }}
+          />
       </div>
     )
   }
