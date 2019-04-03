@@ -4,18 +4,40 @@ import {Bar, Line, Pie} from 'react-chartjs-2';
 
 class Chart extends Component {
   render() {
+
+    const city = this.props.data.city
+    const population = this.props.data.population
     const data = {
+      labels: [...city],
       datasets: [{
-          data: [10, 20, 30]
-      }],
-  
-      // These labels appear in the legend and in the tooltips when hovering different arcs
-      labels: [
-          'Red',
-          'Yellow',
-          'Blue'
-      ]
-  };    
+        data: [...population],
+        backgroundColor: [
+        '#FF6384',
+        '#36A2EB',
+        '#FFCE56',
+        '#800000',
+        '#008000',
+        '#FF0000',
+        'FFA500',
+        '#20B2AA',
+        '#FFFFF0',
+        '#ADFF2F'
+        ],
+        hoverBackgroundColor: [
+        '#FF6384',
+        '#36A2EB',
+        '#FFCE56',
+        '#800000',
+        '#008000',
+        '#FF0000',
+        'FFA500',
+        '#20B2AA',
+        '#FFFFF0',
+        '#ADFF2F'
+        ]
+      }]
+    };
+
     return (
       <div>
         <Pie data={data} />
